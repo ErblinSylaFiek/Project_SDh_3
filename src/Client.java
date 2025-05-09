@@ -1,3 +1,4 @@
+import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.io.DataOutputStream;
@@ -10,5 +11,8 @@ public class Client {
 
         KeyGenerator keyGen = KeyGenerator.getInstance("DES");
         SecretKey desKey = keyGen.generateKey();
+
+        String message = "Pershendetje nga klienti";
+        Cipher desCipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
     }
 }
