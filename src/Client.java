@@ -3,8 +3,12 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import java.io.DataOutputStream;
+import java.io.FileInputStream;
 import java.net.Socket;
+import java.security.KeyFactory;
+import java.security.PublicKey;
 import java.security.SecureRandom;
+import java.security.spec.X509EncodedKeySpec;
 
 public class Client {
     public static void main(String[] args) throws Exception {
@@ -24,5 +28,9 @@ public class Client {
 
         desCipher.init(Cipher.ENCRYPT_MODE, desKey, ivSpec);
         byte[] encryptedMessage = desCipher.doFinal(message.getBytes());
+
+        byte[] publicKeyBytes = new FileInputStream("server_public.key").readAllBytes();
+        X509EncodedKeySpec pubSpec = new X509EncodedKeySpec(publicKeyBytes);
+        PublicKey publicKey = KeyFactory.getInstance("RSA").generatePublic(pubSpec);
     }
 }
