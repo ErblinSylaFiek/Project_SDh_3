@@ -32,5 +32,9 @@ public class Client {
         byte[] publicKeyBytes = new FileInputStream("server_public.key").readAllBytes();
         X509EncodedKeySpec pubSpec = new X509EncodedKeySpec(publicKeyBytes);
         PublicKey publicKey = KeyFactory.getInstance("RSA").generatePublic(pubSpec);
+
+        Cipher rsaCipher = Cipher.getInstance("RSA");
+        rsaCipher.init(Cipher.ENCRYPT_MODE, publicKey);
+        byte[] encryptedDesKey = rsaCipher.doFinal(desKey.getEncoded());
     }
 }
