@@ -1,15 +1,21 @@
 import java.net.ServerSocket;
-import java.io.IOException;
+import java.net.Socket;
 
-public class Server {
-    public static ServerSocket createServer()throws IOException{
-        String serverIp = "127.0.0.1";
-        int serverPort = 12345;
-        ServerSocket serverSocket = new ServerSocket(serverPort);
-        System.out.println("Serveri po pret lidhje...");
-        return serverSocket;
-    }
-    public static void main(String [] args){
+public class Server{
+    public static void main(String []args){
+        try{
+            ServerSocket serverSocket=new ServerSocket(12345);
+            System.out.println("Serveri eshte duke pritur lidhje...");
 
+            Socket clientSocket=serverSocket.accept();
+            System.out.println("Klienti u lidh nga: "+clientSocket.getInetAddress());
+
+            //....
+
+            clientSocket.close();
+            serverSocket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
