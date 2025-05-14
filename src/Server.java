@@ -8,7 +8,7 @@ import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 
 public class Server{
-    public static void main(String []args)throws IOException {
+    public static void main(String []args) throws IOException {
             ServerSocket serverSocket=new ServerSocket(12345);
             System.out.println("Serveri eshte duke pritur lidhje...");
 
@@ -30,7 +30,14 @@ public class Server{
 
             clientSocket.close();
             serverSocket.close();
+
+            try{
+                PrivateKey privateKey=loadPrivateKey("server_private.pem");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
+
     private static PrivateKey loadPrivateKey(String filePath) throws Exception {
         FileInputStream keyFile = new FileInputStream(filePath);
         byte[] keyBytes = keyFile.readAllBytes();
