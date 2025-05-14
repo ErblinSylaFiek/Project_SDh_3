@@ -1,3 +1,5 @@
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -33,6 +35,12 @@ public class Server{
 
             try{
                 PrivateKey privateKey=loadPrivateKey("server_private.pem");
+
+                Cipher rsaCipher = Cipher.getInstance("RSA");
+                rsaCipher.init(Cipher.DECRYPT_MODE, privateKey);
+                byte[] desKeyBytes = rsaCipher.doFinal(encryptedDesKey);
+                SecretKey desKey = new javax.crypto.spec.SecretKeySpec(desKeyBytes, "DES");
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
