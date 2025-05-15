@@ -35,7 +35,7 @@ public class Server{
             serverSocket.close();
 
             try{
-                PrivateKey privateKey=loadPrivateKey("server_private.pem");
+                PrivateKey privateKey=loadPrivateKey("server_private.key");
 
                 Cipher rsaCipher = Cipher.getInstance("RSA");
                 rsaCipher.init(Cipher.DECRYPT_MODE, privateKey);
