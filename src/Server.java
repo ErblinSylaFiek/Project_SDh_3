@@ -1,3 +1,6 @@
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -32,7 +35,20 @@ public class Server{
             serverSocket.close();
 
             try{
-                PrivateKey privateKey=loadPrivateKey("server_private.pem");
+                PrivateKey privateKey=loadPrivateKey("server_private.key");
+
+                Cipher rsaCipher = Cipher.getInstance("RSA");
+                rsaCipher.init(Cipher.DECRYPT_MODE, privateKey);
+                byte[] desKeyBytes = rsaCipher.doFinal(encryptedDesKey);
+                SecretKey desKey = new javax.crypto.spec.SecretKeySpec(desKeyBytes, "DES");
+
+                Cipher desCipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+                IvParameterSpec ivSpec = new IvParameterSpec(iv);
+                desCipher.init(Cipher.DECRYPT_MODE, desKey, ivSpec);
+                byte[] decryptedMessage = desCipher.doFinal(encryptedMessage);
+
+                System.out.println("Mesazhi i dekriptuar: " + new String(decryptedMessage));
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
