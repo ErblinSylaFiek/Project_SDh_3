@@ -36,5 +36,15 @@ public class Client {
         Cipher rsaCipher = Cipher.getInstance("RSA");
         rsaCipher.init(Cipher.ENCRYPT_MODE, publicKey);
         byte[] encryptedDesKey = rsaCipher.doFinal(desKey.getEncoded());
+
+        out.writeInt(encryptedDesKey.length);
+        out.write(encryptedDesKey);
+
+        out.writeInt(encryptedMessage.length);
+        out.write(encryptedMessage);
+
+        out.write(iv);
+
+        System.out.println("Mesazhi u dergua!");
     }
 }
