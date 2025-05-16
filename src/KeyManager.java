@@ -18,8 +18,8 @@ public class KeyManager {
 
         // Ruajtja e çelësave në skedarë
         try (
-                FileOutputStream privateKeyFile = new FileOutputStream("server_private.pem");
-                FileOutputStream publicKeyFile = new FileOutputStream("server_public.pem")
+                FileOutputStream privateKeyFile = new FileOutputStream("server_private.key");
+                FileOutputStream publicKeyFile = new FileOutputStream("server_public.key")
         ) {
             privateKeyFile.write(privateKey.getEncoded());
             publicKeyFile.write(publicKey.getEncoded());
@@ -39,7 +39,7 @@ public class KeyManager {
 
     // Dërgo çelësin publik te klienti (në këtë rast vetëm leximi i çelësit)
     public static byte[] sendPublicKey() throws IOException {
-        try (FileInputStream publicKeyFile = new FileInputStream("server_public.pem")) {
+        try (FileInputStream publicKeyFile = new FileInputStream("server_public.key")) {
             return publicKeyFile.readAllBytes(); // Java 9+ ose përdor .available() me Java 8
         }
     }
