@@ -59,5 +59,12 @@ public class KeyManager {
         }
         return hexString.toString();
     }
+    public static void main(String[] args) throws Exception {
+        // Krijo dhe ruaj çelësat
+        testKeyCreation();
 
+        // Dërgo çelësin publik te klienti
+        byte[] publicKey = sendPublicKey();
+        System.out.println("Çelësi publik është dërguar: " + Base64.getEncoder().encodeToString(publicKey));
+    }
 }
