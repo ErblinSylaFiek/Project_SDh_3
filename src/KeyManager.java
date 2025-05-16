@@ -51,4 +51,13 @@ public class KeyManager {
         System.out.println("Çelësi sekret (hex): " + bytesToHex(secretKey.getEncoded()));
     }
 
+    // Konvertimi i bytes në hex për shfaqje
+    public static String bytesToHex(byte[] bytes) {
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : bytes) {
+            hexString.append(String.format("%02X", b));
+        }
+        return hexString.toString();
+    }
+
 }
