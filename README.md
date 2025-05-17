@@ -63,6 +63,11 @@ Nis të dy komponentët (serverin dhe klientin) në mënyrë automatike me një 
 git clone https://github.com/ErblinSylaFiek/Project_SDh_3
 ```
 
+## Licensa
+
+Ky projekt është i licensuar nën [MIT License](LICENSE).
+
+
 ## Punuan
 - Erblin Syla
 - Erëza Greiçevci
